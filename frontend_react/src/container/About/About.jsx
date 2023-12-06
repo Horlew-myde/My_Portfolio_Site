@@ -3,30 +3,42 @@ import { motion } from "framer-motion";
 
 import { images } from "../../constants";
 import "./About.scss";
+import {urlFor, client} from '../../client'
 
-const abouts = [
-  {
-    title: "Frontend Developer",
-    description: "I am an Excellent Frontend Web Developer",
-    imgUrl: images.about01,
-  },
-  {
-    title: "Web Design",
-    description: "I am an Excellent Web Design",
-    imgUrl: images.about02,
-  },
-  {
-    title: "Backend Developer",
-    description: "I am an Excellent Backend Developer",
-    imgUrl: images.about03,
-  },
-  {
-    title: "Fullstack Developer",
-    description: "I am an Excellent Excellent Developer",
-    imgUrl: images.about04,
-  },
-];
+// const abouts = [
+//   {
+//     title: "Frontend Developer",
+//     description: "I am an Excellent Frontend Web Developer",
+//     imgUrl: images.about01,
+//   },
+//   {
+//     title: "Web Design",
+//     description: "I am an Excellent Web Design",
+//     imgUrl: images.about02,
+//   },
+//   {
+//     title: "Backend Developer",
+//     description: "I am an Excellent Backend Developer",
+//     imgUrl: images.about03,
+//   },
+//   {
+//     title: "Fullstack Developer",
+//     description: "I am an Excellent Excellent Developer",
+//     imgUrl: images.about04,
+//   },
+// ];
+
 const About = () => {
+  const [abouts, setAbouts] = useState([]);
+
+  useEffect(() => {
+    const query = '*[_type == "abouts"]';
+
+    client.fetch(query).then((data) => {
+      setAbouts(data);
+    });
+  }, []);
+
   return (
     <>
       <h2 className="head-text">I know <span> Good Apps</span><br /> means <span> Good Business</span></h2>
@@ -40,7 +52,7 @@ const About = () => {
             className="app__profile-item"
             key={about.title + index}
           >
-            <img src={about.imgUrl} alt={about.title} />
+            <img src={urlFor(about.imgUrl)} alt={about.title} />
             <h2 className="bold-text" style={{ marginTop: 20 }}>
               {about.title}{" "}
             </h2>

@@ -17,7 +17,7 @@ const scaleVariants = {
 
 const Header = () => {
   return (
-    <div className="app__header app__flex">
+    <div id="home" className="app__header app__flex">
       <motion.div
         whileInView={{ x: [-100, 0], opacity: [0, 1] }}
         transition={{ duration: 0.9 }}
@@ -44,7 +44,7 @@ const Header = () => {
         transition={{ duration: 0.9, delayChildren: 0.9 }}
         className="app__header-img"
       >
-        <img src={images.profile} alt="Profile_bg" />
+        <img className="profile_pic" src={images.profile} alt="Profile_bg" />
         <motion.img
           whileInView={{ scale: [0, 1] }}
           transition={{ duration: 1.3, ease: "easeInOut" }}
@@ -57,15 +57,13 @@ const Header = () => {
       <motion.div
         variant={scaleVariants}
         whileInView={scaleVariants.whileInView}
-        className="app__header_circles"
+        className="app__header-circles"
       >
-        {[images.tailwindcss, images.redux, images.sass].map(
-          (circle, index) => (
+        {[images.tailwindcss, images.react, images.sass].map((circle, index) => (
             <div className="circle-cmp app__flex" key={`circle-${index}`}>
               <img src={circle} alt="circle" />
             </div>
-          )
-        )}
+          ))}
       </motion.div>
     </div>
   );
